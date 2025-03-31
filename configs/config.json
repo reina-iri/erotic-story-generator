@@ -1,0 +1,5 @@
+{
+  "model_name": "MythoMax-L2-13B-GPTQ",
+  "precision": "4bit",
+  "safetensors": "128g"
+}
