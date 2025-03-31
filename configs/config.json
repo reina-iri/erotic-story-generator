@@ -1,5 +1,6 @@
 {
-  "model_name": "MythoMax-L2-13B-GPTQ",
-  "precision": "4bit",
-  "safetensors": "128g"
+  "model_name": "TheBloke/MythoMax-L2-13B-GPTQ",
+  "quantization": "4bit-128g",
+  "device_target": "cuda",
+  "max_length": 1024
 }
