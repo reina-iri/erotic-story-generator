@@ -11,15 +11,16 @@ with open("configs/config.json", "r", encoding="utf-8") as f:
 def load_model():
     model_path = os.path.join("models", config["model_name"])
     if not os.path.exists(model_path):
-        # Add code here to automatically download the model if it doesn't exist
+        # Здесь можно добавить код для автоматического скачивания модели
         pass
     return "model_object"
 
 model = load_model()
 
-# Function to generate story
+# Function to generate story using system prompt and inputs
 def generate_story(theme, genre, mood, length, tags, prompt1, prompt2, prompt3, count):
-    system_prompt = f"""
+    # Формируем системное сообщение
+    SYSTEM_PROMPT = f"""
     You are an erotic storyteller. Write a story from the first-person perspective of a passionate woman.
     The genre is: {genre}.
     The mood is: {mood}.
@@ -30,10 +31,20 @@ def generate_story(theme, genre, mood, length, tags, prompt1, prompt2, prompt3, 
     """
     stories = []
     for _ in range(count):
-        # Replace this pseudo-code with actual generation logic using the model
-        story = f"Title: Erotic Story\n\nThis is a generated story with tags: {tags}.\n{prompt1}\n{prompt2}\n{prompt3}\n..."
+        # Здесь должна быть логика генерации с использованием модели,
+        # сейчас мы используем заглушку
+        story = f"Title: Erotic Story\n\nSYSTEM PROMPT:\n{SYSTEM_PROMPT}\n\nAdditional Prompts:\n{prompt1}\n{prompt2}\n{prompt3}\n\nTags: {tags}\n\n(Generated story text...)"
         stories.append(format_story(story))
     return "\n\n---\n\n".join(stories)
+
+# Функции для кнопок "Copy All" и "Save as TXT"
+# Пока они просто возвращают тот же текст (в будущем можно расширить функционал)
+def copy_all(story_text):
+    return story_text
+
+def save_as_txt(story_text):
+    # Пока заглушка – возвращаем текст, который можно сохранить вручную
+    return story_text
 
 # Gradio interface
 with gr.Blocks() as demo:
@@ -60,10 +71,15 @@ with gr.Blocks() as demo:
     with gr.Row():
         btn_generate = gr.Button("Generate Story")
         btn_generate3 = gr.Button("Generate 3 Stories")
+        btn_copy = gr.Button("Copy All")
+        btn_save = gr.Button("Save as TXT")
     
     output = gr.Textbox(label="Generated Story", lines=15)
     
+    # Связываем кнопки с функциями
     btn_generate.click(fn=lambda *args: generate_story(*args, 1), inputs=[theme, genre, mood, length, tags, prompt1, prompt2, prompt3], outputs=output)
     btn_generate3.click(fn=lambda *args: generate_story(*args, 3), inputs=[theme, genre, mood, length, tags, prompt1, prompt2, prompt3], outputs=output)
+    btn_copy.click(fn=copy_all, inputs=output, outputs=output)
+    btn_save.click(fn=save_as_txt, inputs=output, outputs=output)
 
 demo.launch(server_name="0.0.0.0", server_port=7860)
