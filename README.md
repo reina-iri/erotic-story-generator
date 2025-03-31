@@ -1,14 +1,18 @@
 # Erotic Story Generator
 
-This project is an erotic story generator from a female first-person perspective using the **MythoMax-L2-13B-GPTQ** model.
-
-## Project Structure
-/erotic-story-generator ├── app.py ├── requirements.txt ├── README.md ├── Dockerfile ├── configs │ └── config.json ├── models │ └── (MythoMax-L2-13B-GPTQ model) └── utils └── formatters.py
-
-## How to Run
-
-### Locally or via Docker
-1. Install dependencies: `pip install -r requirements.txt`
-2. Run the application: `python app.py --listen --port 7860`
-
 [![Run on RunPod](https://img.shields.io/badge/RunPod-Deploy-blue)](https://runpod.io/console/pods/new?template=your-template-name)
+
+This is an erotic story generator from a married woman's POV, powered by **MythoMax-L2-13B-GPTQ** (4-bit), with a Gradio web interface.
+
+## Features
+- Choose Genre, Mood, and length (short/medium/long)
+- Female POV enforced in the system prompt
+- Format output with a header, tags, art prompts
+- Generate 1 or 3 stories at once
+- Buttons: “Copy All” and “Save as TXT”
+
+## Local Installation
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/yourname/erotic-story-generator.git
+   cd erotic-story-generator
